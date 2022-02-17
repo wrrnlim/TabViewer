@@ -1,0 +1,44 @@
+{
+  "name": "tab-viewer",
+  "productName": "TabViewer",
+  "version": "0.0.1",
+  "description": "View your musical tabs all in one place",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "publish": "electron-builder -p always"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wrrnlim/TabViewer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wrrnlim/TabViewer/issues"
+  },
+  "homepage": "https://github.com/wrrnlim/TabViewer#readme",
+  "devDependencies": {
+    "electron": "13.5.1",
+    "electron-builder": "^22.14.5"
+  },
+  "dependencies": {
+    "@pdftron/webviewer": "^8.3.0",
+    "electron-updater": "^4.6.1"
+  },
+  "build": {
+    "appId": "com.github.wrrnlim.TabViewer",
+    "win": {
+      "icon": "assets/icons/icon.ico",
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false
+    },
+    "directories": {
+      "buildResources": "assets",
+      "output": "release"
+    }
+  }
+}
