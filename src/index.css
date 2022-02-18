@@ -25,7 +25,6 @@ body {
     border: 1px solid #485056;
     background-color: transparent;
     color: #f8f9fa;
-    padding: 6px 18px;
     border-radius: 4px;
     white-space: nowrap;
     height: 28px;
@@ -47,16 +46,16 @@ body {
   }
 
   hr {
-    margin: 5px 4px;
+    margin: 10px 4px 0px 4px;
     border: 1px solid #485056;
     border-radius: 50px;
   }
 
   .tooltip {
     position: relative;
-    display: inline-block;
-    margin: 8px;
-    width: 50px; /* sidebar width */
+    display: flex;
+    margin: 10px 8px 0px 8px;
+    width: 100px; /* sidebar width */
   }
 
   .tooltip .tooltiptext {
@@ -77,12 +76,12 @@ body {
   /* Show the tooltip text when you mouse over the tooltip container */
   .tooltip:hover .tooltiptext {
     visibility: visible;
-    opacity: 80%;
+    opacity: 90%;
   }
 
   .tooltip .tooltiptext {
-    top: 0px;
-    left: 210%;
+    top: -55%;
+    left: 105%;
     opacity: 0;
     transition: opacity 0.2s;
   }

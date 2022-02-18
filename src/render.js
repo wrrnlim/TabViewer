@@ -11,7 +11,7 @@ const saveFileBtn = document.getElementById('save-file');
 
 WebViewer(
   {
-    path: '../node_modules/@pdftron/webviewer/public', // TODO remove public folder
+    path: '../node_modules/@pdftron/webviewer/public',
   },
   viewerElement
 ).then((instance) => {

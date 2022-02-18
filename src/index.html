@@ -15,6 +15,18 @@
     <div class="sidebar">
 
       <div class="tooltip">
+        <button id="open-file">Open File</button>
+        <span class="tooltiptext">Open a single PDF file for viewing or editing</span>
+      </div>
+
+      <div class="tooltip">
+        <button id="open-folder">Open Folder</button>
+        <span class="tooltiptext">Open folder containing tabs for song switching</span>
+      </div>
+      
+      <hr>
+
+      <div class="tooltip">
         <select class="tab-key" id="key">
           <option value="tab key">Tab Key</option>
           <option value="A">A</option>
@@ -29,20 +41,21 @@
         </select>
         <span class="tooltiptext">Choose between chord sheet and lead sheet</span>
       </div>
-      <hr>
+      
       <div class="tooltip">
-        <button id="open-file">Open File</button>
-        <span class="tooltiptext">Open a single PDF file</span>
+        <select name="song-select" id="song-select">
+          
+        </select>
+        <span class="tooltiptext">Select a song sheet from the current folder</span>
       </div>
-      <div class="tooltip">
-        <button id="open-folder">Open Folder</button>
-        <span class="tooltiptext">Tooltip text</span>
-      </div>
+      
       <hr>
+
       <div class="tooltip">
         <button id="save-file">Save File</button>
-        <span class="tooltiptext">Tooltip text</span>
+        <span class="tooltiptext">Save your annotations to a new PDF file</span>
       </div>
+
     </div>
     <div class="webviewer" id="viewer"></div>
   </div>

@@ -75,7 +75,7 @@ const menuTemplate = [ // TODO change menu items
             },
             { type: 'separator' },
             {
-                label: 'App Version: ' + version,
+                label: 'TabViewer Version: ' + version,
                 enabled: false
             },
             {
