@@ -85,14 +85,14 @@ openFolderBtn.addEventListener('click', () => {
       { name: 'Images', extensions: ['png', 'jpg', 'jpeg'] },
     ]
   }).then(file => {
-    filePath = file.filePaths[0];
-    const songList = indexFiles();
-    populateSongList(songList);
-    populateKeysList(songList);
-    populateChordsList(songList);
-    selectDiv.classList.remove('hide');
-    selectDiv.classList.add('tooltip');
-    console.log(file);
+    if(!file.canceled) {
+      filePath = file.filePaths[0];
+      const songList = indexFiles();
+      populateLists(songList);
+      selectDiv.classList.remove('hide');
+      selectDiv.classList.add('tooltip');
+      console.log(file);
+    }
   });
 });
 
@@ -103,18 +103,23 @@ function indexFiles() {
   files.forEach(file => {
     let filename = file.split('.')
     if (filename.length > 1) { // continue if file not a folder
-      file = filename[0];
-      if (file.split('-').length >= 3) { // continue if file has correct naming
-        const songName = toTitleCase(file.split('-').slice(0,-2).join(' '));
-        const chordKey = file.split('-').slice(-2)[0];
-        const format = file.split('-').slice(-1)[0];
+      filename = filename[0];
+      if (filename.split('-').length >= 3) { // continue if file has correct naming
+        const songName = toTitleCase(filename.split('-').slice(0,-2).join(' '));
+        const chordKey = filename.split('-').slice(-2)[0];
+        const format = filename.split('-').slice(-1)[0];
         if (!(songName in songList)) {
-          let chords = {}
-          chords[chordKey] = [format];
+          let songFile = {};
+          songFile[format] = file;
+          let chords = {};
+          chords[chordKey] = songFile;
           songList[songName] = chords;
         }
         else if (!(chordKey in songList[songName])) {
-          songList[songName][chordKey] = [format];
+          songList[songName][chordKey] = {[format]: file};
+        }
+        else if (!(format in songList[songName][chordKey])) {
+          songList[songName][chordKey][format] = file;
         }
         else {
           songList[songName][chordKey].push(format);
@@ -126,22 +131,18 @@ function indexFiles() {
   return songList;
 }
 
-function populateKeysList(songList) {
+function populateLists(songList) {
   selectSel.innerHTML = '<option value="Select song" selected disabled>Select song</option>';
   console.log(songList);
   Object.keys(songList).forEach(song => {
     const option = document.createElement('option');
     option.innerHTML = song;
+    firstKey = Object.keys(songList[song])[0];
+    firstSheet = Object.keys(songList[song][firstKey])[0];
+    option.value = songList[song][firstKey][firstSheet];
+    console.log(`songList[${song}][${firstKey}][${firstSheet}]`);
     selectSel.appendChild(option);
   });
-}
-
-function populateChordsList(songList) {
-  
-}
-
-function populateSongList(songList) {
-
 }
 
 function toTitleCase(str) {
