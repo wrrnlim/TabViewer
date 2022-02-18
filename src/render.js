@@ -85,9 +85,20 @@ openFolderBtn.addEventListener('click', () => {
       { name: 'Images', extensions: ['png', 'jpg', 'jpeg'] },
     ]
   }).then(file => {
+    filePath = file.filePaths[0];
+    populateSongList();
     selectDiv.classList.remove('hide');
     selectDiv.classList.add('tooltip');
     console.log(file);
-    filePath = file.filePaths[0];
   });
 });
+
+function populateSongList() {
+  const files = fs.readdirSync(filePath);
+  selectSel.innerHTML = '<option value="Select song" selected disabled>Select song</option>';
+  files.forEach(file => {
+    const option = document.createElement('option');
+    option.innerHTML = file;
+    selectSel.appendChild(option);
+  });
+}
