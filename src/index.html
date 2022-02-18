@@ -13,8 +13,35 @@
 <body>
   <div class="container">
     <div class="sidebar">
-      <button id="open">Open File</button>
-      <button id="save">Save File</button>
+      <div class="tooltip">
+        <select class="tab-key" id="key">
+          <option value="tab key">Tab Key</option>
+          <option value="A">A</option>
+        </select>
+        <span class="tooltiptext">Tooltip text</span>
+      </div>
+
+      <div class="tooltip">
+        <select name="format" id="tab-format">
+          <option value="Chords">Chords</option>
+          <option value="Lead">Lead</option>
+        </select>
+        <span class="tooltiptext">Tooltip text</span>
+      </div>
+      <hr>
+      <div class="tooltip">
+        <button id="open-file">Open File</button>
+        <span class="tooltiptext">Tooltip text</span>
+      </div>
+      <div class="tooltip">
+        <button id="open-folder">Open Folder</button>
+        <span class="tooltiptext">Tooltip text</span>
+      </div>
+      <hr>
+      <div class="tooltip">
+        <button id="save">Save File</button>
+        <span class="tooltiptext">Tooltip text</span>
+      </div>
     </div>
     <div class="webviewer" id="viewer"></div>
   </div>

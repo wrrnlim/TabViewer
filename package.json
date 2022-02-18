@@ -1,7 +1,7 @@
 {
   "name": "tab-viewer",
   "productName": "TabViewer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "View your musical tabs all in one place",
   "main": "main.js",
   "scripts": {
