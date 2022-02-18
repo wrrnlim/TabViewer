@@ -102,8 +102,11 @@ app.on('ready', () => {
             contextIsolation: false,
             enableRemoteModule: true,
         },
-        icon: './assets/img/icon.ico' 
+        show: false,
+        icon: './assets/icons/icon.ico' 
     });
+    mainWindow.maximize();
+    mainWindow.show();
 
     /* Open links in external browser */
     mainWindow.webContents.setWindowOpenHandler(({ url }) => {
