@@ -7,7 +7,14 @@ const { dialog } = require("electron").remote;
 const viewerElement = document.getElementById('viewer');
 const openFileBtn = document.getElementById('open-file');
 const openFolderBtn = document.getElementById('open-folder');
+const tabKeySel = document.getElementById('key');
+const formatSel = document.getElementById('tab-format');
+const selectDiv = document.getElementById('song-div');
+const selectSel = document.getElementById('song-select');
 const saveFileBtn = document.getElementById('save-file');
+
+let filePath;
+
 
 WebViewer(
   {
@@ -32,6 +39,11 @@ WebViewer(
         instance.loadDocument(file.filePaths[0]);
       }
     });
+  });
+
+  selectSel.addEventListener('change', () => {
+    console.log(`opening ${filePath}/${selectSel.value}`);
+    instance.loadDocument(`${filePath}/${selectSel.value}`);
   });
 
   saveFileBtn.addEventListener('click', () => {
@@ -62,5 +74,20 @@ WebViewer(
         });
       }
     });
+  });
+});
+
+openFolderBtn.addEventListener('click', () => {
+  dialog.showOpenDialog({
+    properties: ['openDirectory'],
+    filters: [
+      { name: 'Documents', extensions: ['pdf', 'docx', 'pptx'] },
+      { name: 'Images', extensions: ['png', 'jpg', 'jpeg'] },
+    ]
+  }).then(file => {
+    selectDiv.classList.remove('hide');
+    selectDiv.classList.add('tooltip');
+    console.log(file);
+    filePath = file.filePaths[0];
   });
 });
