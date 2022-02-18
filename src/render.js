@@ -5,8 +5,9 @@ const fs = require("fs");
 const { dialog } = require("electron").remote;
 
 const viewerElement = document.getElementById('viewer');
-const openFileBtn = document.getElementById('open');
-const saveFileBtn = document.getElementById('save');
+const openFileBtn = document.getElementById('open-file');
+const openFolderBtn = document.getElementById('open-folder');
+const saveFileBtn = document.getElementById('save-file');
 
 WebViewer(
   {
