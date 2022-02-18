@@ -96,9 +96,26 @@ openFolderBtn.addEventListener('click', () => {
 function populateSongList() {
   const files = fs.readdirSync(filePath);
   selectSel.innerHTML = '<option value="Select song" selected disabled>Select song</option>';
+  let songList = {}
   files.forEach(file => {
-    const option = document.createElement('option');
-    option.innerHTML = file;
-    selectSel.appendChild(option);
+    file = file.split('.')[0];
+    const songName = file.split('-').slice(0,-2).join(' ');
+    const chordKey = file.split('-').slice(-2)[0];
+    const format = file.split('-').slice(-1)[0];
+    if (!(songName in songList)) {
+      let chords = {}
+      chords[chordKey] = [format];
+      songList[songName] = chords;
+    }
+    else if (!(chordKey in songList[songName])) {
+      songList[songName][chordKey] = [format];
+    }
+    else {
+      songList[songName][chordKey].push(format);
+    }
+    // const option = document.createElement('option');
+    // option.innerHTML = file;
+    // selectSel.appendChild(option);
   });
+  console.log(songList);
 }
