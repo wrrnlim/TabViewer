@@ -45,6 +45,14 @@ WebViewer(
     console.log(`opening ${filePath}/${songSel.value}`);
     populateKeyFormatLists();
     instance.loadDocument(`${filePath}/${songSel.value}`);
+    console.log('file loaded');
+  });
+
+  tabKeySel.addEventListener('change', () => {
+    selectedSong = songSel.options[songSel.selectedIndex].text
+    console.log(selectedSong, tabKeySel.value, formatSel.value);
+    instance.loadDocument(`${filePath}/${songList[selectedSong][tabKeySel.value][formatSel.value]}`);
+    console.log('file loaded');
   });
 
   saveFileBtn.addEventListener('click', () => {
@@ -165,7 +173,7 @@ async function populateKeyFormatLists() {
     }
     const option = document.createElement('option');
     option.innerHTML = toWords[format];
-    option.value = toWords[format];
+    option.value = format;
     formatSel.appendChild(option);
     if (i === 0) option.selected = true;
   });
