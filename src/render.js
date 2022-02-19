@@ -46,14 +46,14 @@ WebViewer(
   });
 
   songSel.addEventListener('change', () => {
-    console.log(`opening ${filePath}/${songSel.value}`);
-    populateKeyFormatLists();
+    populateKeyList();
+    populateFormatList();
     instance.loadDocument(`${filePath}/${songSel.value}`);
-    console.log('file loaded');
   });
 
   tabKeySel.addEventListener('change', () => {
-      loadSong();
+    populateFormatList();
+    loadSong();
   });
 
   formatSel.addEventListener('change', () => {
@@ -62,9 +62,7 @@ WebViewer(
 
   function loadSong() {
     selectedSong = songSel.options[songSel.selectedIndex].text
-    console.log(selectedSong, tabKeySel.value, formatSel.value);
     instance.loadDocument(`${filePath}/${songList[selectedSong][tabKeySel.value][formatSel.value]}`);
-    console.log('file loaded');
   }
 
   saveFileBtn.addEventListener('click', () => {
@@ -173,7 +171,7 @@ function populateSongList() {
   });
 }
 
-async function populateKeyFormatLists() {
+async function populateKeyList() {
   tabKeySel.innerHTML = '<option value="Select key" selected disabled>Select key</option>';
   const selectedSong = songSel.options[songSel.selectedIndex].text;
   Object.keys(songList[selectedSong]).forEach((key, i) => { // get selected song text and iterate through the chord keys
@@ -183,8 +181,11 @@ async function populateKeyFormatLists() {
     tabKeySel.appendChild(option);
     if (i === 0) option.selected = true;
   });
+}
 
+async function populateFormatList() {
   formatSel.innerHTML = '<option value="Select format" selected disabled>Select format</option>';
+  const selectedSong = songSel.options[songSel.selectedIndex].text;
   const selectedKey = tabKeySel.value;
   console.log(selectedKey);
   Object.keys(songList[selectedSong][selectedKey]).forEach((format, i) => { // get selected key and iterate through the formats
