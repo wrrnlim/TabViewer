@@ -7,11 +7,15 @@ const { dialog } = require("electron").remote;
 const viewerElement = document.getElementById('viewer');
 const openFileBtn = document.getElementById('open-file');
 const openFolderBtn = document.getElementById('open-folder');
+const tabKeyDiv = document.getElementById('key-div');
 const tabKeySel = document.getElementById('key');
+const formatDiv = document.getElementById('format-div');
 const formatSel = document.getElementById('tab-format');
-const selectDiv = document.getElementById('song-div');
+const songDiv = document.getElementById('song-div');
 const songSel = document.getElementById('song-select');
+const divider = document.getElementById('divider');
 const saveFileBtn = document.getElementById('save-file');
+const saveDiv = document.getElementById('save-div');
 
 let filePath, songList = {};
 
@@ -106,8 +110,17 @@ openFolderBtn.addEventListener('click', () => {
       filePath = file.filePaths[0];
       indexFiles();
       populateSongList();
-      selectDiv.classList.remove('hide');
-      selectDiv.classList.add('tooltip');
+      // Make buttons/selects visible
+      tabKeyDiv.classList.remove('hide');
+      tabKeyDiv.classList.add('tooltip');
+      formatDiv.classList.remove('hide');
+      formatDiv.classList.add('tooltip');
+      songDiv.classList.remove('hide');
+      songDiv.classList.add('tooltip');
+      divider.classList.remove('hide');
+      divider.classList.add('tooltip');
+      saveDiv.classList.remove('hide');
+      saveDiv.classList.add('tooltip');
       console.log(songList);
     }
   });
