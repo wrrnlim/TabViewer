@@ -17,7 +17,7 @@ const divider = document.getElementById('divider');
 const saveFileBtn = document.getElementById('save-file');
 const saveDiv = document.getElementById('save-div');
 
-let filePath, songList = {};
+let filePath, songList;
 
 
 WebViewer(
@@ -74,7 +74,6 @@ WebViewer(
       ]
     }).then(file => {
       if (!file.canceled) {
-        console.log(file);
         const doc = docViewer.getDocument();
         annotManager.exportAnnotations().then(xfdfString => {
           doc.getFileData({
@@ -119,14 +118,13 @@ openFolderBtn.addEventListener('click', () => {
       divider.classList.add('tooltip');
       saveDiv.classList.remove('hide');
       saveDiv.classList.add('tooltip');
-      console.log(songList);
     }
   });
 });
 
 function indexFiles() {
+  songList = {};
   const files = fs.readdirSync(filePath);
-  
   files.forEach(file => {
     let filename = file.split('.')
     if (filename.length > 1) { // continue if file not a folder
@@ -187,7 +185,6 @@ async function populateFormatList() {
   formatSel.innerHTML = '<option value="Select format" selected disabled>Select format</option>';
   const selectedSong = songSel.options[songSel.selectedIndex].text;
   const selectedKey = tabKeySel.value;
-  console.log(selectedKey);
   Object.keys(songList[selectedSong][selectedKey]).forEach((format, i) => { // get selected key and iterate through the formats
     const toWords = {
       cs: 'Chord sheet',
