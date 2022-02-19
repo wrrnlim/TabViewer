@@ -43,7 +43,7 @@ WebViewer(
 
   songSel.addEventListener('change', () => {
     console.log(`opening ${filePath}/${songSel.value}`);
-    populateKeyList();
+    populateKeyFormatLists();
     instance.loadDocument(`${filePath}/${songSel.value}`);
   });
 
@@ -144,7 +144,7 @@ function populateSongList() {
   });
 }
 
-async function populateKeyList() {
+async function populateKeyFormatLists() {
   tabKeySel.innerHTML = '<option value="Select key" selected disabled>Select key</option>';
   const selectedSong = songSel.options[songSel.selectedIndex].text;
   Object.keys(songList[selectedSong]).forEach((key, i) => { // get selected song text and iterate through the chord keys
@@ -159,9 +159,13 @@ async function populateKeyList() {
   const selectedKey = tabKeySel.value;
   console.log(selectedKey);
   Object.keys(songList[selectedSong][selectedKey]).forEach((format, i) => { // get selected key and iterate through the formats
+    const toWords = {
+      cs: 'Chord sheet',
+      ls: 'Lead sheet',
+    }
     const option = document.createElement('option');
-    option.innerHTML = format;
-    option.value = format;
+    option.innerHTML = toWords[format];
+    option.value = toWords[format];
     formatSel.appendChild(option);
     if (i === 0) option.selected = true;
   });

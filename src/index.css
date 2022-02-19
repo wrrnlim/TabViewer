@@ -28,7 +28,7 @@ body {
     border-radius: 4px;
     white-space: nowrap;
     height: 28px;
-    width: 100px;
+    width: 150px;
     cursor: pointer;
   }
 
@@ -41,7 +41,7 @@ body {
     border-radius: 4px;
     white-space: nowrap;
     height: 28px;
-    width: 100px;
+    width: 150px;
     cursor: pointer;
   }
 
@@ -55,7 +55,7 @@ body {
     position: relative;
     display: flex;
     margin: 10px 8px 0px 8px;
-    width: 100px; /* sidebar width */
+    width: 150px; /* sidebar width */
   }
 
   .tooltip .tooltiptext {
