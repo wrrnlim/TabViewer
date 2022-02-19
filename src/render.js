@@ -49,11 +49,19 @@ WebViewer(
   });
 
   tabKeySel.addEventListener('change', () => {
+      loadSong();
+  });
+
+  formatSel.addEventListener('change', () => {
+    loadSong();
+  });
+
+  function loadSong() {
     selectedSong = songSel.options[songSel.selectedIndex].text
     console.log(selectedSong, tabKeySel.value, formatSel.value);
     instance.loadDocument(`${filePath}/${songList[selectedSong][tabKeySel.value][formatSel.value]}`);
     console.log('file loaded');
-  });
+  }
 
   saveFileBtn.addEventListener('click', () => {
     dialog.showSaveDialog({
