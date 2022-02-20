@@ -1,5 +1,6 @@
 # TabViewer
-![Work in progress](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+![Pre-release](https://img.shields.io/badge/status-pre--release-orange)
+![Electron version](https://img.shields.io/badge/electron-v13.5.1-blue)
 
  Easily view and annotate your music tabs all in one place
 
