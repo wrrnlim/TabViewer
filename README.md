@@ -16,7 +16,7 @@ Currently, songs files must have the following naming convention:
 song-name-A-cs.pdf
 ```
 
-where A is the key that the song is in, and cs is cs or ls, for chord sheet and lead sheet respectively. Place all your song sheets into a folder, then open the folder in TabViewer. If you have a song in multiple keys and correctly followed the naming convention, you can change the key using the dropdown menus.
+where `A` is the key that the song is in, and `cs` is `cs` or `ls` for chord sheet and lead sheet respectively. Place all your song sheets into a folder, then open the folder in TabViewer. If you have a song in multiple keys and correctly followed the naming convention, you can change the key using the dropdown menus.
 
 ## Credits
 
