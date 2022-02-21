@@ -26,6 +26,6 @@ The following are planned features for future updates to TabViewer. Feel free to
 
 - Implement automatic renaming of files ([Issue #2](https://github.com/wrrnlim/TabViewer/issues/2))
 
-## Credits
+## Resources
 
 The PDF webviewer used in this project is created by [PDFTron](https://github.com/PDFTron/webviewer-electron-sample/) ([tutorial](https://youtu.be/FyZ40lNE-pY))
