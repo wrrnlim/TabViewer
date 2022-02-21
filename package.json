@@ -13,7 +13,7 @@
     "url": "git+https://github.com/wrrnlim/TabViewer.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Warren Lim",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/wrrnlim/TabViewer/issues"
@@ -29,6 +29,7 @@
   },
   "build": {
     "appId": "com.github.wrrnlim.TabViewer",
+    "productName": "TabViewer",
     "win": {
       "icon": "assets/icons/icon.ico",
       "target": "nsis"
