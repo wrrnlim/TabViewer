@@ -5,7 +5,7 @@
 [![GitHub Release Date](https://img.shields.io/github/release-date/wrrnlim/electron-app-template)](https://github.com/wrrnlim/TabViewer/releases)
 ![Platform](https://img.shields.io/badge/platform-win--32%20%7C%20win—64-lightgrey)
 ![Preview](./assets/img/preview.png)
-*Song sheet partly removed for copyright reasons*
+<sub><sup>*Song sheet partly removed due to copyright*</sup></sub>
 
 Easily view and annotate your music tabs all in one place. TabViewer enables you to view music sheets and switch between songs, music keys, and lead sheet/chord sheet formats within a folder. Annotate your music with handwriting, text, or highlights, and export it as a PDF.
 
