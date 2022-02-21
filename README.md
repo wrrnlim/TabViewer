@@ -8,6 +8,10 @@
 
 Easily view and annotate your music tabs all in one place. TabViewer enables you to view music sheets and switch between songs, music keys, and lead sheet/chord sheet formats within a folder. Annotate your music with handwriting, text, or highlights, and export it as a PDF.
 
+## Installation
+
+To install, go to the [releases](https://github.com/wrrnlim/TabViewer/releases/) page and download the setup `.exe` for the latest release. Your browser and/or operating system may detect the installer as malicious and prompt you to not download/run this file. You may need to manually approve the download and allow the setup to run. Each release will have a VirusTotal check and a checksum to verify that the download does not contain any viruses.
+
 ## Usage
 
 Currently, songs files must have the following naming convention:
