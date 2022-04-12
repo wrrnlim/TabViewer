@@ -8,7 +8,7 @@ const viewerElement = document.getElementById('viewer');
 const openFileBtn = document.getElementById('open-file');
 const openFolderBtn = document.getElementById('open-folder');
 const tabKeyDiv = document.getElementById('key-div');
-const tabKeySel = document.getElementById('key');
+const chordKeySel = document.getElementById('key');
 const formatDiv = document.getElementById('format-div');
 const formatSel = document.getElementById('tab-format');
 const songDiv = document.getElementById('song-div');
@@ -46,23 +46,23 @@ WebViewer(
   });
 
   songSel.addEventListener('change', () => {
-    populateKeyList();
     populateFormatList();
+    populateKeyList();
     instance.loadDocument(`${filePath}/${songSel.value}`);
   });
 
-  tabKeySel.addEventListener('change', () => {
-    populateFormatList();
+  chordKeySel.addEventListener('change', () => {
     loadSong();
   });
 
   formatSel.addEventListener('change', () => {
+    populateKeyList();
     loadSong();
   });
 
   function loadSong() {
     selectedSong = songSel.options[songSel.selectedIndex].text
-    instance.loadDocument(`${filePath}/${songList[selectedSong][tabKeySel.value][formatSel.value]}`);
+    instance.loadDocument(`${filePath}/${songList[selectedSong][formatSel.value][chordKeySel.value]}`);
   }
 
   saveFileBtn.addEventListener('click', () => {
@@ -134,25 +134,26 @@ function indexFiles() {
         const chordKey = filename.split('-').slice(-2)[0];
         const format = filename.split('-').slice(-1)[0];
         if (!(songName in songList)) {
-          let songFile = {};
-          songFile[format] = file;
-          let chords = {};
-          chords[chordKey] = songFile;
-          songList[songName] = chords;
+          let songFiles = {};
+          songFiles[chordKey] = file;
+          let formats = {};
+          formats[format] = songFiles;
+          songList[songName] = formats;
         }
-        else if (!(chordKey in songList[songName])) {
-          songList[songName][chordKey] = {[format]: file};
+        else if (!(format in songList[songName])) {
+            let songFiles = {};
+            songFiles[chordKey] = file;
+            songList[songName][format] = songFiles;
         }
-        else if (!(format in songList[songName][chordKey])) {
-          songList[songName][chordKey][format] = file;
+        else if (!(chordKey in songList[songName][format])) {
+            songList[songName][format][chordKey] = file;
         }
         else {
-          songList[songName][chordKey].push(format);
+          songList[songName][format][chordKey] = file;
         }
       }
     }
   });
-
   return songList;
 }
 
@@ -169,31 +170,32 @@ function populateSongList() {
   });
 }
 
-async function populateKeyList() {
-  tabKeySel.innerHTML = '<option value="Select key" selected disabled>Select key</option>';
-  const selectedSong = songSel.options[songSel.selectedIndex].text;
-  Object.keys(songList[selectedSong]).forEach((key, i) => { // get selected song text and iterate through the chord keys
-    const option = document.createElement('option');
-    option.innerHTML = key;
-    option.value = key;
-    tabKeySel.appendChild(option);
-    if (i === 0) option.selected = true;
-  });
-}
-
 async function populateFormatList() {
   formatSel.innerHTML = '<option value="Select format" selected disabled>Select format</option>';
   const selectedSong = songSel.options[songSel.selectedIndex].text;
-  const selectedKey = tabKeySel.value;
-  Object.keys(songList[selectedSong][selectedKey]).forEach((format, i) => { // get selected key and iterate through the formats
-    const toWords = {
-      cs: 'Chord sheet',
-      ls: 'Lead sheet',
-    }
+  const toWords = {
+    cs: 'Chord sheet',
+    ls: 'Lead sheet',
+  }
+  Object.keys(songList[selectedSong]).forEach((format, i) => { // get selected song and iterate through the formats
     const option = document.createElement('option');
     option.innerHTML = toWords[format];
     option.value = format;
     formatSel.appendChild(option);
+    if (i === 0) option.selected = true;
+  });
+}
+
+async function populateKeyList() {
+  chordKeySel.innerHTML = '<option value="Select key" selected disabled>Select key</option>';
+  const selectedSong = songSel.options[songSel.selectedIndex].text;
+  const selectedFormat = formatSel.value;
+  console.log('Selected Format', selectedFormat);
+  Object.keys(songList[selectedSong][selectedFormat]).forEach((key, i) => { // get selected song text and iterate through the chord keys for the selected format
+    const option = document.createElement('option');
+    option.innerHTML = key;
+    option.value = key;
+    chordKeySel.appendChild(option);
     if (i === 0) option.selected = true;
   });
 }
