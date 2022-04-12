@@ -1,7 +1,7 @@
 {
   "name": "tab-viewer",
   "productName": "TabViewer",
-  "version": "0.2.0-beta",
+  "version": "0.3.0-beta",
   "description": "View and annotate your musical tabs all in one place",
   "main": "main.js",
   "scripts": {
