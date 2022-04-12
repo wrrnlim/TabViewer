@@ -160,12 +160,15 @@ function indexFiles() {
 function populateSongList() {
   songSel.innerHTML = '<option value="Select song" selected disabled>Select song</option>';
   Object.keys(songList).forEach(song => {
-    keysList = Object.keys(songList[song]);
-    sheetsList = Object.keys(songList[song][keysList[0]]);
+    var format = 'cs';
+    if (songList[song]['cs'] == undefined) format = 'ls'; // only use ls if no cs
+    // const formatsList = Object.keys(songList[song]);
+    const chordList = Object.keys(songList[song][format]);
     // Song selection
     const option = document.createElement('option');
     option.innerHTML = song;
-    option.value = songList[song][keysList[0]][sheetsList[0]];
+    
+    option.value = songList[song][format][chordList[0]];
     songSel.appendChild(option);
   });
 }
@@ -181,8 +184,12 @@ async function populateFormatList() {
     const option = document.createElement('option');
     option.innerHTML = toWords[format];
     option.value = format;
-    formatSel.appendChild(option);
-    if (i === 0) option.selected = true;
+    if (format == 'cs') {
+        formatSel.insertBefore(option, formatSel.childNodes[1]); // Format list always shows Chord sheet first if available
+        option.selected = true; // Set this as selected option
+    }
+    else formatSel.appendChild(option);
+    if (i === 0) option.selected = true; // show first option as selected
   });
 }
 
@@ -190,7 +197,6 @@ async function populateKeyList() {
   chordKeySel.innerHTML = '<option value="Select key" selected disabled>Select key</option>';
   const selectedSong = songSel.options[songSel.selectedIndex].text;
   const selectedFormat = formatSel.value;
-  console.log('Selected Format', selectedFormat);
   Object.keys(songList[selectedSong][selectedFormat]).forEach((key, i) => { // get selected song text and iterate through the chord keys for the selected format
     const option = document.createElement('option');
     option.innerHTML = key;
