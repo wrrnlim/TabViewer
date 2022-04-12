@@ -103,7 +103,7 @@ openFolderBtn.addEventListener('click', () => {
       { name: 'Images', extensions: ['png', 'jpg', 'jpeg'] },
     ]
   }).then(file => {
-    if(!file.canceled) {
+    if (!file.canceled) {
       filePath = file.filePaths[0];
       indexFiles();
       populateSongList();
@@ -130,7 +130,7 @@ function indexFiles() {
     if (filename.length > 1) { // continue if file not a folder
       filename = filename[0];
       if (filename.split('-').length >= 3) { // continue if file has correct naming
-        const songName = toTitleCase(filename.split('-').slice(0,-2).join(' '));
+        const songName = toTitleCase(filename.split('-').slice(0, -2).join(' '));
         const chordKey = filename.split('-').slice(-2)[0];
         const format = filename.split('-').slice(-1)[0];
         if (!(songName in songList)) {
@@ -141,12 +141,12 @@ function indexFiles() {
           songList[songName] = formats;
         }
         else if (!(format in songList[songName])) {
-            let songFiles = {};
-            songFiles[chordKey] = file;
-            songList[songName][format] = songFiles;
+          let songFiles = {};
+          songFiles[chordKey] = file;
+          songList[songName][format] = songFiles;
         }
         else if (!(chordKey in songList[songName][format])) {
-            songList[songName][format][chordKey] = file;
+          songList[songName][format][chordKey] = file;
         }
         else {
           songList[songName][format][chordKey] = file;
@@ -159,17 +159,25 @@ function indexFiles() {
 
 function populateSongList() {
   songSel.innerHTML = '<option value="Select song" selected disabled>Select song</option>';
+  const unloadedFiles = [];
   Object.keys(songList).forEach(song => {
     var format = 'cs';
     if (songList[song]['cs'] == undefined) format = 'ls'; // only use ls if no cs
-    // const formatsList = Object.keys(songList[song]);
-    const chordList = Object.keys(songList[song][format]);
-    // Song selection
-    const option = document.createElement('option');
-    option.innerHTML = song;
-    
-    option.value = songList[song][format][chordList[0]];
-    songSel.appendChild(option);
+    try {
+      const chordList = Object.keys(songList[song][format]);
+      // Song selection
+      const option = document.createElement('option');
+      option.innerHTML = song;
+  
+      option.value = songList[song][format][chordList[0]];
+      songSel.appendChild(option);
+    } catch (error) {
+      console.log(`Could not load song: ${song}: ${error}`);
+      unloadedFiles.append(song);
+    }
+    if (unloadedFiles) {
+      console.log(`Could not load songs: ${unloadedFiles}`); // TODO replace with error popup
+    }
   });
 }
 
@@ -185,8 +193,8 @@ async function populateFormatList() {
     option.innerHTML = toWords[format];
     option.value = format;
     if (format == 'cs') {
-        formatSel.insertBefore(option, formatSel.childNodes[1]); // Format list always shows Chord sheet first if available
-        option.selected = true; // Set this as selected option
+      formatSel.insertBefore(option, formatSel.childNodes[1]); // Format list always shows Chord sheet first if available
+      option.selected = true; // Set this as selected option
     }
     else formatSel.appendChild(option);
     if (i === 0) option.selected = true; // show first option as selected
@@ -209,7 +217,7 @@ async function populateKeyList() {
 function toTitleCase(str) {
   return str.replace(
     /\w\S*/g,
-    function(txt) {
+    function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     }
   );
