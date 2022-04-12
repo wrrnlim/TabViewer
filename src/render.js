@@ -28,8 +28,8 @@ WebViewer(
 ).then((instance) => {
   instance.setTheme('dark');
   instance.disableElements(['downloadButton']);
-  const LayoutMode = instance.UI.LayoutMode;
-  instance.UI.setLayoutMode(LayoutMode.Facing)
+  const FacingContinuous = instance.UI.LayoutMode.FacingContinuous;
+  instance.UI.setLayoutMode(FacingContinuous)
 
   const { docViewer, annotManager } = instance;
 
@@ -66,6 +66,10 @@ WebViewer(
     selectedSong = songSel.options[songSel.selectedIndex].text
     instance.loadDocument(`${filePath}/${songList[selectedSong][formatSel.value][chordKeySel.value]}`);
   }
+
+  docViewer.addEventListener('documentLoaded', function() {
+    instance.UI.setLayoutMode(FacingContinuous);
+  });
 
   saveFileBtn.addEventListener('click', () => {
     dialog.showSaveDialog({
