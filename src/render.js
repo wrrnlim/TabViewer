@@ -47,6 +47,36 @@ WebViewer(
     });
   });
 
+  openFolderBtn.addEventListener('click', () => {
+    dialog.showOpenDialog({
+      properties: ['openDirectory'],
+      filters: [
+        { name: 'Documents', extensions: ['pdf', 'docx', 'pptx'] },
+        { name: 'Images', extensions: ['png', 'jpg', 'jpeg'] },
+      ]
+    }).then(file => {
+      if (!file.canceled) {
+        instance.UI.closeDocument();
+        filePath = file.filePaths[0];
+        indexFiles();
+        populateSongList();
+        populateFormatList();
+        populateKeyList();
+        // Make buttons/selects visible
+        tabKeyDiv.classList.remove('hide');
+        tabKeyDiv.classList.add('tooltip');
+        formatDiv.classList.remove('hide');
+        formatDiv.classList.add('tooltip');
+        songDiv.classList.remove('hide');
+        songDiv.classList.add('tooltip');
+        divider.classList.remove('hide');
+        divider.classList.add('tooltip');
+        saveDiv.classList.remove('hide');
+        saveDiv.classList.add('tooltip');
+      }
+    });
+  });
+
   songSel.addEventListener('change', () => {
     populateFormatList();
     populateKeyList();
@@ -67,7 +97,7 @@ WebViewer(
     instance.loadDocument(`${filePath}/${songList[selectedSong][formatSel.value][chordKeySel.value]}`);
   }
 
-  docViewer.addEventListener('documentLoaded', function() {
+  docViewer.addEventListener('documentLoaded', () => {
     instance.UI.setLayoutMode(FacingContinuous); // double page layout on document switch
   });
 
@@ -98,33 +128,6 @@ WebViewer(
         });
       }
     });
-  });
-});
-
-openFolderBtn.addEventListener('click', () => {
-  dialog.showOpenDialog({
-    properties: ['openDirectory'],
-    filters: [
-      { name: 'Documents', extensions: ['pdf', 'docx', 'pptx'] },
-      { name: 'Images', extensions: ['png', 'jpg', 'jpeg'] },
-    ]
-  }).then(file => {
-    if (!file.canceled) {
-      filePath = file.filePaths[0];
-      indexFiles();
-      populateSongList();
-      // Make buttons/selects visible
-      tabKeyDiv.classList.remove('hide');
-      tabKeyDiv.classList.add('tooltip');
-      formatDiv.classList.remove('hide');
-      formatDiv.classList.add('tooltip');
-      songDiv.classList.remove('hide');
-      songDiv.classList.add('tooltip');
-      divider.classList.remove('hide');
-      divider.classList.add('tooltip');
-      saveDiv.classList.remove('hide');
-      saveDiv.classList.add('tooltip');
-    }
   });
 });
 
