@@ -11,7 +11,7 @@ Easily view and annotate your music tabs all in one place. TabViewer enables you
 
 ## Installation
 
-To install, go to the [releases](https://github.com/wrrnlim/TabViewer/releases/) page and download the setup `.zip` for the latest release. Your browser and/or operating system may detect the installer as malicious and prompt you to not download/run this file. You may need to manually approve the download and allow the setup to run. Each release will have a VirusTotal check and a checksum to verify that the download does not contain any viruses.
+TabViewer is currently in pre-release (beta). To install, go to the [releases](https://github.com/wrrnlim/TabViewer/releases/) page and download the setup `.zip` for the latest release. Each release has a VirusTotal check and a checksum to verify that the download does not contain any viruses.
 
 ## Usage
 
@@ -27,9 +27,7 @@ In future updates, I plan to add an upload section to the app, so users can uplo
 
 ## Roadmap
 
-The following are planned features for future updates to TabViewer. Feel free to contribute to this project by putting in a pull request!
-
-- Implement automatic renaming of files ([Issue #2](https://github.com/wrrnlim/TabViewer/issues/2))
+Planned features are opened as Issues with the [enhancements](https://github.com/wrrnlim/TabViewer/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement) label. You may also view the [project board](https://github.com/users/wrrnlim/projects/3/views/1). Feel free to contribute to this project by putting in a pull request!
 
 ## Resources
 
