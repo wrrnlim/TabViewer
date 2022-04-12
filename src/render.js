@@ -68,7 +68,7 @@ WebViewer(
   }
 
   docViewer.addEventListener('documentLoaded', function() {
-    instance.UI.setLayoutMode(FacingContinuous);
+    instance.UI.setLayoutMode(FacingContinuous); // double page layout on document switch
   });
 
   saveFileBtn.addEventListener('click', () => {
@@ -181,7 +181,7 @@ function populateSongList() {
       console.log(`Could not load song: ${song}: ${error}`);
       unloadedFiles.push(song);
     }
-    if (unloadedFiles) {
+    if (unloadedFiles.length > 0) {
       console.log(`Could not load songs: ${unloadedFiles}`); // TODO replace with error popup
     }
   });
