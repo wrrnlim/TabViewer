@@ -28,6 +28,8 @@ WebViewer(
 ).then((instance) => {
   instance.setTheme('dark');
   instance.disableElements(['downloadButton']);
+  const LayoutMode = instance.UI.LayoutMode;
+  instance.UI.setLayoutMode(LayoutMode.Facing)
 
   const { docViewer, annotManager } = instance;
 
@@ -173,7 +175,7 @@ function populateSongList() {
       songSel.appendChild(option);
     } catch (error) {
       console.log(`Could not load song: ${song}: ${error}`);
-      unloadedFiles.append(song);
+      unloadedFiles.push(song);
     }
     if (unloadedFiles) {
       console.log(`Could not load songs: ${unloadedFiles}`); // TODO replace with error popup
