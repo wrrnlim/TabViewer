@@ -1,9 +1,9 @@
-// const { default: WebViewer } = require("@pdftron/webviewer");
 
 const fs = require("fs");
-
+const storage = require('electron-json-storage');
 const { dialog } = require("electron").remote;
 
+// DOM elements
 const viewerElement = document.getElementById('viewer');
 const openFileBtn = document.getElementById('open-file');
 const openFolderBtn = document.getElementById('open-folder');
@@ -19,6 +19,17 @@ const saveDiv = document.getElementById('save-div');
 
 let filePath, songList;
 
+// Loads last opened folder from db
+document.addEventListener('DOMContentLoaded', () => {
+  storage.get('recents', (err, data) => {
+    if (err) throw err;
+    if (data && !(Object.keys(data).length === 0)) {
+      console.log(data);
+      filePath = data.lastOpened
+      loadFolder();
+    }
+  });
+});
 
 WebViewer(
   {
@@ -58,21 +69,8 @@ WebViewer(
       if (!file.canceled) {
         instance.UI.closeDocument();
         filePath = file.filePaths[0];
-        indexFiles();
-        populateSongList();
-        populateFormatList();
-        populateKeyList();
-        // Make buttons/selects visible
-        tabKeyDiv.classList.remove('hide');
-        tabKeyDiv.classList.add('tooltip');
-        formatDiv.classList.remove('hide');
-        formatDiv.classList.add('tooltip');
-        songDiv.classList.remove('hide');
-        songDiv.classList.add('tooltip');
-        divider.classList.remove('hide');
-        divider.classList.add('tooltip');
-        saveDiv.classList.remove('hide');
-        saveDiv.classList.add('tooltip');
+        loadFolder();
+        storeRecent(filePath);
       }
     });
   });
@@ -131,6 +129,23 @@ WebViewer(
   });
 });
 
+function loadFolder() {
+  console.log(`Loading folder: ${filePath}`);
+  indexFiles();
+  populateSongList();
+  // Make buttons/selects visible
+  tabKeyDiv.classList.remove('hide');
+  tabKeyDiv.classList.add('tooltip');
+  formatDiv.classList.remove('hide');
+  formatDiv.classList.add('tooltip');
+  songDiv.classList.remove('hide');
+  songDiv.classList.add('tooltip');
+  divider.classList.remove('hide');
+  divider.classList.add('tooltip');
+  saveDiv.classList.remove('hide');
+  saveDiv.classList.add('tooltip');
+}
+
 function indexFiles() {
   songList = {};
   const files = fs.readdirSync(filePath);
@@ -177,7 +192,7 @@ function populateSongList() {
       // Song selection
       const option = document.createElement('option');
       option.innerHTML = song;
-  
+
       option.value = songList[song][format][chordList[0]];
       songSel.appendChild(option);
     } catch (error) {
@@ -230,4 +245,14 @@ function toTitleCase(str) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     }
   );
+}
+
+function storeRecent(path) {
+  storage.get('recents', (err, data) => {
+    if (err) throw err;
+    data.lastOpened = path;
+    storage.set('recents', data, (err) => {
+      if (err) throw err;
+    });
+  });
 }
