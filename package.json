@@ -1,7 +1,7 @@
 {
   "name": "tab-viewer",
   "productName": "TabViewer",
-  "version": "0.3.1-beta",
+  "version": "1.0.0",
   "description": "View and annotate your musical tabs all in one place",
   "main": "main.js",
   "scripts": {
@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@pdftron/webviewer": "^8.3.0",
+    "electron-json-storage": "^4.5.0",
     "electron-updater": "^4.6.1"
   },
   "build": {
