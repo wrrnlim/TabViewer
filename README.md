@@ -11,7 +11,7 @@ Easily view and annotate your music tabs all in one place. TabViewer enables you
 
 ## Installation
 
-TabViewer is currently in pre-release (beta). To install, go to the [releases](https://github.com/wrrnlim/TabViewer/releases/) page and download the setup `.zip` for the latest release. Each release has a VirusTotal check and a checksum to verify that the download does not contain any viruses.
+To install, go to the [releases](https://github.com/wrrnlim/TabViewer/releases/) page and download the setup `.zip` for the latest release. Unzip the file and run the installer to install! Each release has a VirusTotal check and a checksum to verify that the download does not contain any viruses.
 
 ## Usage
 
