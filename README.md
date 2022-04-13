@@ -3,7 +3,7 @@
 ![Released](https://img.shields.io/badge/status-released-green)
 ![Electron version](https://img.shields.io/badge/electron-v13.6.6-blue)
 [![GitHub Release Date](https://img.shields.io/github/release-date/wrrnlim/TabViewer)](https://github.com/wrrnlim/TabViewer/releases)
-![Platform](https://img.shields.io/badge/platform-win--32%20%7C%20win—64-lightgrey)
+![Platform](https://img.shields.io/badge/platform-win--32%20%7C%20win--64-lightgrey)
 ![Preview](./assets/img/preview.png)
 <sub><sup>*Song sheet partly removed due to copyright*</sup></sub>
 
