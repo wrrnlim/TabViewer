@@ -1,7 +1,7 @@
 
 const fs = require("fs");
 const storage = require('electron-json-storage');
-const { dialog } = require("electron").remote;
+const { dialog, ipcRenderer } = require("electron");
 
 // DOM elements
 const viewerElement = document.getElementById('viewer');
@@ -19,17 +19,21 @@ const saveDiv = document.getElementById('save-div');
 
 let filePath, songList;
 
-// Loads last opened folder from db
-document.addEventListener('DOMContentLoaded', () => {
+// Explicitly set storage path
+(async () => {
+  const userDataPath = await ipcRenderer.invoke('getUserDataPath');
+  storage.setDataPath(userDataPath);
+  // Loads last opened folder from db
   storage.get('recents', (err, data) => {
+    console.log(data);
     if (err) throw err;
     if (data && !(Object.keys(data).length === 0)) {
-      console.log(data);
       filePath = data.lastOpened
       loadFolder();
     }
   });
-});
+})();
+
 
 WebViewer(
   {
