@@ -1,7 +1,7 @@
 
 const fs = require("fs");
 const storage = require('electron-json-storage');
-const { dialog, ipcRenderer } = require("electron");
+const { ipcRenderer } = require("electron");
 
 // DOM elements
 const viewerElement = document.getElementById('viewer');
@@ -48,17 +48,17 @@ WebViewer(
 
   const { docViewer, annotManager } = instance;
 
-  openFileBtn.addEventListener('click', () => {
-    dialog.showOpenDialog({
+  openFileBtn.addEventListener('click', async () => {
+    ipcRenderer.invoke('show-file-dialog', {
       properties: ['openFile'],
       filters: [
         { name: 'Documents', extensions: ['pdf', 'docx', 'pptx'] },
-        { name: 'Images', extensions: ['png', 'jpg', 'jpeg'] },
       ]
     }).then(file => {
-      if (!file.canceled) {
-        instance.loadDocument(file.filePaths[0]);
-      }
+      // if (!file.canceled) {
+      //   instance.loadDocument(file.filePaths[0]);
+      // }
+      console.log(file);
     });
   });
 

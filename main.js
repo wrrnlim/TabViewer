@@ -2,6 +2,7 @@
  * Electron related code
  */
 const electron = require('electron');
+const { dialog } = require('electron');
 const { app, BrowserWindow, ipcMain, shell, Menu } = electron; // ES6 destructuring -> equivalent to app = electron.app etc
 const { autoUpdater } = require("electron-updater");
 
@@ -196,4 +197,12 @@ ipcMain.on('close-update-window', () => {
 
 ipcMain.handle('getUserDataPath', async () => {
   return app.getPath('userData');
+});
+
+ipcMain.handle('show-file-dialog', async (options) => {
+  dialog.showOpenDialog(options).then(result => {
+    if (!result.canceled) {
+      return result.filePaths[0];
+    }
+  });
 });
